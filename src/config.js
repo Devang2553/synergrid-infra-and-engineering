@@ -1,0 +1,67 @@
+/* ==================================================================
+   SITE SETTINGS
+   Edit the three values below, rebuild (npm run build), and the whole
+   site updates: header, footer, contact page and WhatsApp button.
+   ================================================================== */
+
+/* 1. Mobile number, used for BOTH the call link and WhatsApp.
+      Leave it empty until the client sends it. Any format works:
+      "98765 43210", "+91 98765 43210", "919876543210".
+      While it is empty the WhatsApp button stays hidden and the contact
+      page shows "To be added before launch". */
+export const MOBILE_NUMBER = "9725009345";   // TEMPORARY: Devang's number for testing. Replace with the company number when it arrives.
+
+/* 2. Google Apps Script web app URL that receives enquiries (ends in /exec).
+      See README, "Connect enquiries". Until it is set, the form still works
+      as a demo and shows the request summary without sending it. */
+export const RFQ_ENDPOINT = "https://script.google.com/macros/s/AKfycbzlaojpzc2jZEkFShd-E4TRHmOjH8Zr2_ikj0nbPh0JMW8z_2AZo4c74pH5MCrnjCdmDQ/exec";
+
+/* 3. Inbox shown on the site. Enquiries are emailed to the address set in
+      apps-script/Code.gs (NOTIFY_EMAIL), which is the same inbox. */
+export const ENQUIRY_EMAIL = "synergrid.eng@gmail.com";
+
+/* ------------------------------------------------------------------ */
+
+const ADDRESS_LINES = [
+  "F-111, Ratnam Heights",
+  "Opp. Motibhai Park, Khodiyar Nagar",
+  "New Karelibaug, Vadodara",
+  "Gujarat 390022",
+];
+
+/* "98765 43210" -> "919876543210" (wa.me and tel: format) */
+function toDigits(n) {
+  let d = String(n || "").replace(/\D/g, "");
+  if (d.length === 11 && d[0] === "0") d = d.slice(1);
+  if (d.length === 10) d = "91" + d;
+  return d.length >= 11 && d.length <= 15 ? d : "";
+}
+/* "919876543210" -> "+91 98765 43210" */
+function toPretty(d) {
+  if (!d) return "";
+  if (d.length === 12 && d.startsWith("91")) return "+91 " + d.slice(2, 7) + " " + d.slice(7);
+  return "+" + d;
+}
+
+const env = (import.meta && import.meta.env) || {};
+const mobileDigits = toDigits(MOBILE_NUMBER || env.VITE_MOBILE_NUMBER);
+
+export const SITE = {
+  name: "SYNERGRID INFRA & ENGINEERING SERVICES",
+  tagline: "Powering Trust, Engineering Excellence",
+  city: "Vadodara, Gujarat, India",
+
+  email: ENQUIRY_EMAIL,
+  address: ADDRESS_LINES.join(", "),
+  addressLines: ADDRESS_LINES,
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Ratnam Heights, Khodiyar Nagar, New Karelibaug, Vadodara, Gujarat 390022"),
+
+  phone: toPretty(mobileDigits),          // shown on the site, "" until set
+  phoneHref: mobileDigits ? "tel:+" + mobileDigits : "",
+  whatsapp: mobileDigits,                 // wa.me digits, "" until set
+
+  domain: "",                             // e.g. "synergrid.in", for your reference
+  rfqEndpoint: RFQ_ENDPOINT || env.VITE_RFQ_ENDPOINT || "",
+};
+
+export const TITLE_SUFFIX = " | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions";
