@@ -7,10 +7,7 @@ export default function Mep() {
   const ref = usePage({ init, stage: .565 });
   return (
     <>
-      <Seo
-        title={"Industrial MEP Contracting | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"Integrated industrial MEP contracting: chilled water HVAC, HT/LT electrical, plumbing and effluent drainage, fire suppression and ELV automation."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="mep">
         <section className="phero">
           <div className="wrap phero__grid">

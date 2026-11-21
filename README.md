@@ -120,11 +120,38 @@ Good to know:
 - A free Gmail account can send about 100 emails a day from scripts, far more
   than an enquiry form needs.
 
+## SEO and link previews
+
+Everything search engines and link previews read is set in **`src/seo/meta.js`**:
+the live address (`SITE_URL`), each page's title and description, and the
+business details (schema.org JSON-LD). `npm run build` then writes:
+
+- a ready-made HTML file per page (`dist/about.html`, `dist/mep.html`, ...) with
+  that page's title, description, canonical URL, Open Graph / Twitter share tags
+  and JSON-LD, so Google, WhatsApp, LinkedIn and Facebook see the right text
+  and the share image without running JavaScript;
+- `dist/sitemap.xml` listing every page.
+
+Static files in `public/`: `robots.txt`, `site.webmanifest`, the share image
+`og-image.jpg` (1200 x 630), `logo.png`, and the favicon / app icon set.
+
+After going live:
+
+1. Add `https://www.synergridinfra.com` to **Google Search Console**, verify it
+   (DNS record on the domain), and submit `sitemap.xml`.
+2. Create or claim the **Google Business Profile** for the Vadodara office with
+   the exact same name, address and phone as the site, and link the website.
+3. Test link previews with the LinkedIn Post Inspector and Facebook Sharing
+   Debugger; both also refresh cached previews.
+
+If the domain changes, update `SITE_URL` in `src/seo/meta.js` and the
+`Sitemap:` line in `public/robots.txt`.
+
 ## Deploy
 
 Static site; every path must serve `index.html`:
 
-- **Vercel**: `vercel.json` already rewrites all routes.
+- **Vercel**: `vercel.json` serves each page's own HTML (`cleanUrls`) and rewrites everything else.
 - **Netlify**: build `npm run build`, publish `dist`; `public/_redirects` handles routes.
 - **cPanel / shared hosting**: upload `dist/` and add an `.htaccess`:
   ```apache

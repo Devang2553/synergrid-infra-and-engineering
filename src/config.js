@@ -60,8 +60,7 @@ export const SITE = {
   phoneHref: mobileDigits ? "tel:+" + mobileDigits : "",
   whatsapp: mobileDigits,                 // wa.me digits, "" until set
 
-  domain: "",                             // e.g. "synergrid.in", for your reference
+  domain: "www.synergridinfra.com",       // live address; SEO URLs are set in src/seo/meta.js
   rfqEndpoint: RFQ_ENDPOINT || env.VITE_RFQ_ENDPOINT || "",
 };
 
-export const TITLE_SUFFIX = " | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions";
