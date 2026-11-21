@@ -7,10 +7,7 @@ export default function Compliance() {
   const ref = usePage({ init, stage: 1 });
   return (
     <>
-      <Seo
-        title={"Quality Compliance Standards | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"The codes behind every SYNERGRID design and test report, the industrial sectors we serve and the diagnostic equipment we measure with."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="compliance">
         <section className="phero">
           <div className="wrap phero__grid">

@@ -7,10 +7,7 @@ export default function PowerSystemDesign() {
   const ref = usePage({ init, stage: .735 });
   return (
     <>
-      <Seo
-        title={"Power System Analysis ETAP | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"Power system analysis in ETAP and SKM: load flow, short circuit, relay coordination, arc flash, harmonics, substations up to 400kV and solar design."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="power">
         <section className="phero">
           <div className="wrap phero__grid">

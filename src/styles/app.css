@@ -524,7 +524,7 @@ html, body { overflow-x: hidden; }
 /* ---- address, directions, WhatsApp in the form ---- */
 .addr { font-style: normal; display: grid; gap: 2px; }
 .maplink { display: inline-block; margin-top: 8px; font-size: .86em; text-decoration: underline; text-underline-offset: 3px; }
-.btn--wa { background: #1F8A5B; color: #fff; }
+.btn--wa { background: #1A7A50; color: #fff; }
 .btn--wa:hover { background: #18734B; }
 .btn--wa svg { width: 20px; height: 20px; }
 .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }

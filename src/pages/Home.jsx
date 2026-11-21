@@ -8,10 +8,7 @@ export default function Home() {
   const ref = usePage({ init });
   return (
     <>
-      <Seo
-        title={"Turnkey Industrial EPC Contractor Gujarat | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"SYNERGRID INFRA & ENGINEERING SERVICES, Vadodara. Turnkey EPC solutions for industrial plants across India, from concept to commissioning."}
-      />
+      <Seo />
       <section ref={ref} className="view" data-view="home">
 
         {/* 1. the plant assembles as you scroll */}
@@ -22,7 +19,7 @@ export default function Home() {
               <div className="wrap">
                 <div className="asm__col">
                   <div className="cap" data-cap="0">
-                    <span className="kicker">SYNERGRID Infra &amp; Engineering Services · Vadodara</span>
+                    <span className="kicker">Turnkey industrial EPC contractor · Vadodara, Gujarat</span>
                     <h1 className="disp disp--4" data-split="">Powering Trust, <em>Engineering Excellence</em></h1>
                     <p className="lede">Turnkey EPC for industrial plants across India. One team takes your site from bare land to a tested, running plant. Scroll, and watch it get built.</p>
                     <div className="row"><Link className="btn btn--amber" to="/contact" data-magnet="">Request a proposal <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" /></svg></Link><Link className="tlink" to="/about">Why one contract</Link></div>

@@ -4,7 +4,6 @@ import { gsap } from "gsap";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
-import StructuredData from "./StructuredData.jsx";
 import { pageName } from "./routes.js";
 import { RM } from "../lib/dom.js";
 import { stopPlant } from "../lib/plantHost.js";
@@ -84,7 +83,6 @@ export default function Layout() {
       </main>
       <Footer />
       <WhatsAppButton />
-      <StructuredData />
     </>
   );
 }

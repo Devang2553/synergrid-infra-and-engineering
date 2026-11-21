@@ -7,7 +7,7 @@ export default function NotFound() {
   const ref = usePage({ stage: 0.1 });
   return (
     <>
-      <Seo title="Page Not Found | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions" description="This page is not part of the SYNERGRID site." />
+      <Seo notFound />
       <section ref={ref} className="view page">
         <section className="phero">
           <div className="wrap phero__grid">

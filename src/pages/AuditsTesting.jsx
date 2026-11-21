@@ -7,10 +7,7 @@ export default function AuditsTesting() {
   const ref = usePage({ init, stage: .86 });
   return (
     <>
-      <Seo
-        title={"Electrical Safety Audit Vadodara | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"CEA 2023 electrical safety audits, lightning and earthing risk assessment, relay and breaker testing, cable testing and transformer oil filtration services."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="audits">
         <section className="phero">
           <div className="wrap phero__grid">

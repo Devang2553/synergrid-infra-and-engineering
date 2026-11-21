@@ -7,10 +7,7 @@ export default function CivilPeb() {
   const ref = usePage({ init, stage: .385 });
   return (
     <>
-      <Seo
-        title={"Civil and PEB Structure Construction | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"Greenfield civil works, RCC foundations, pre-engineered steel buildings, epoxy and ESD flooring, and STAAD.Pro structural design for industrial plants."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="civil">
         <section className="phero">
           <div className="wrap phero__grid">

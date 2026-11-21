@@ -10,10 +10,7 @@ export default function Contact() {
   const ref = usePage({ init, stage: .175 });
   return (
     <>
-      <Seo
-        title={"Request a Turnkey EPC Proposal | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"Send SYNERGRID your scope, facility location, timeline and BOQ to request a turnkey EPC proposal. Corporate office in Vadodara, Gujarat."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="contact">
         <section className="phero">
           <div className="wrap phero__grid">

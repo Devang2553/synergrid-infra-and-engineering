@@ -7,10 +7,7 @@ export default function About() {
   const ref = usePage({ init, stage: 1 });
   return (
     <>
-      <Seo
-        title={"About Us | SYNERGRID INFRA & ENGINEERING SERVICES - Turnkey EPC Solutions"}
-        description={"One accountable EPC partner from bare land to a running plant. Meet the civil, MEP and electrical safety engineers behind SYNERGRID, Vadodara."}
-      />
+      <Seo />
       <section ref={ref} className="view page" data-view="about">
         <section className="phero">
           <div className="wrap phero__grid">
