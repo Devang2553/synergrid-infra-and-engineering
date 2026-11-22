@@ -24,7 +24,10 @@ export const isConnected = () => Boolean(SITE.rfqEndpoint);
 
 /* fields: { ref, name, company, email, phone, scope, location, timeline, notes, summary, hp }
    file:   a File or null.
-   Resolves when the request has left the browser; rejects on a network error. */
+   Resolves with the script's reply ({ ok: true, ref, row }) once the enquiry is
+   emailed and in the sheet. Rejects when it did not get there: a network error,
+   a web app that is not shared with "Anyone" (Google answers with a sign-in
+   page, which the browser blocks), or the script itself reporting an error. */
 export async function sendEnquiry(fields, file) {
   const payload = {
     ...fields,
@@ -34,11 +37,18 @@ export async function sendEnquiry(fields, file) {
       ? { name: file.name, type: file.type || "application/octet-stream", size: file.size, data: await readAsBase64(file) }
       : null,
   };
-  // text/plain + no-cors avoids a CORS preflight, which Apps Script web apps do not answer.
-  await fetch(SITE.rfqEndpoint, {
+  // text/plain is a "simple" request, so there is no CORS preflight (Apps Script
+  // does not answer one). The web app's JSON reply carries CORS headers, so we
+  // can read it and know the enquiry really arrived.
+  const res = await fetch(SITE.rfqEndpoint, {
     method: "POST",
-    mode: "no-cors",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(payload),
+    redirect: "follow",
   });
+  if (!res.ok) throw new Error("Enquiry endpoint answered HTTP " + res.status);
+  let reply;
+  try { reply = await res.json(); } catch (e) { throw new Error("Enquiry endpoint did not answer with JSON (is the web app shared with Anyone?)"); }
+  if (!reply || reply.ok !== true) throw new Error("Enquiry was not saved: " + ((reply && reply.error) || "unknown error"));
+  return reply;
 }

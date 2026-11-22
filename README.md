@@ -112,6 +112,12 @@ Good to know:
   shows the summary, and says nothing has been sent.
 - If you change `Code.gs` later, use **Deploy → Manage deployments → Edit →
   Version: New version → Deploy** so the same `/exec` URL keeps working.
+- **Check the link is public:** open the `/exec` URL in a private/incognito
+  window. It must show `{"ok":true,"service":"SYNERGRID enquiries"}`. If it shows
+  *"You need access"* or a Google sign-in page, the deployment's **Who has access**
+  is not **Anyone**: fix it under **Deploy → Manage deployments → Edit**. While it
+  is not public, the form now tells the visitor it could not send (and logs
+  `[RFQ] enquiry not delivered` in the browser console) instead of pretending.
 - To copy enquiries to more people, set `CC_EMAILS` in `Code.gs`.
 - To also send the client a short "we have received your enquiry" email, set
   `SEND_CLIENT_ACK: true` in `Code.gs`.

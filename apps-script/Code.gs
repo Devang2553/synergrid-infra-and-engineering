@@ -66,6 +66,9 @@ function doPost(e) {
     console.error(err);
     return json_({ ok: false, error: String(err) });
   } finally {
+    // Write the new row before letting the next request in, so a repeat of the
+    // same enquiry (same reference) finds it and is not saved or emailed twice.
+    try { SpreadsheetApp.flush(); } catch (x) {}
     try { lock.releaseLock(); } catch (x) {}
   }
 }
@@ -83,7 +86,21 @@ function handleEnquiry_(d) {
 
   var sheet = getSheet_();
   var ref = /^SG-\d{6}-\d{4}$/.test(d.ref || "") ? d.ref : makeRef_();
-  if (findRow_(sheet, ref)) return { ok: true, duplicate: true, ref: ref };   // double click, already saved
+  // The same enquiry can reach this script twice (a retried request, a double
+  // click). Remember each reference for 6 hours and the sheet as a backstop,
+  // so it is only ever saved and emailed once.
+  var cache = CacheService.getScriptCache();
+  if (cache.get("ref:" + ref)) return { ok: true, duplicate: true, ref: ref };
+  if (findRow_(sheet, ref)) { cache.put("ref:" + ref, "1", 21600); return { ok: true, duplicate: true, ref: ref }; }
+  cache.put("ref:" + ref, "1", 21600);
+  // Older copies of the website could send one click as two requests with two
+  // different references. The same person sending the same request again within
+  // 2 minutes is treated as that repeat.
+  var sameKey = "same:" + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5,
+    [d.name, d.email, d.phone, d.company, d.scope, d.location, d.timeline, d.notes].map(function (x) { return String(x || "").trim().toLowerCase(); }).join("|"), Utilities.Charset.UTF_8));
+  var firstRef = cache.get(sameKey);
+  if (firstRef) return { ok: true, duplicate: true, ref: firstRef };
+  cache.put(sameKey, ref, 120);
 
   // attachment -> Drive
   var blob = null, fileUrl = "", fileName = "";

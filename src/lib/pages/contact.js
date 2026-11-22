@@ -13,6 +13,12 @@ let cleanups = [];
    ================================================================ */
 export function init(view, api = {}) {
   cleanups = [];
+  /* Every listener is tied to this mount and removed on cleanup. Without this a
+     second mount (React StrictMode in dev, or a re-render) left the first set of
+     listeners alive, so one click on "Issue request" sent the enquiry twice. */
+  var ac = new AbortController(), on = { signal: ac.signal };
+  cleanups.push(function () { ac.abort(); });
+  var sending = false;
   var form = $("#rfq", view), step = 1, MAX = 10 * 1024 * 1024;
   var panes = $$(".pane", form), steps = $$(".steps li", form);
   var back = $("#wiz-back", form), next = $("#wiz-next", form), send = $("#wiz-send", form);
@@ -41,9 +47,9 @@ export function init(view, api = {}) {
       location: v("rfq-location"), timeline: v("rfq-timeline"), notes: v("rfq-notes") });
   }
   function refreshWa() { if (hasWhatsApp() && waBtn) waBtn.href = waLink(draft(false)); }
-  form.addEventListener("input", live); form.addEventListener("change", live);
-  form.addEventListener("input", refreshWa); form.addEventListener("change", refreshWa);
-  $("#rfq-file", form).addEventListener("change", function () { var f = file(); $("#rfq-file-name", form).textContent = f ? f.name + " · " + (f.size / 1048576).toFixed(1) + " MB" : "No file chosen"; err("rfq-file", fileErr(f)); });
+  form.addEventListener("input", live, on); form.addEventListener("change", live, on);
+  form.addEventListener("input", refreshWa, on); form.addEventListener("change", refreshWa, on);
+  $("#rfq-file", form).addEventListener("change", function () { var f = file(); $("#rfq-file-name", form).textContent = f ? f.name + " · " + (f.size / 1048576).toFixed(1) + " MB" : "No file chosen"; err("rfq-file", fileErr(f)); }, on);
   function validate(s) {
     var ok = true;
     if (s === 1) ok = err("rfq-scope", scopes().length ? "" : "Choose at least one scope.");
@@ -70,13 +76,13 @@ export function init(view, api = {}) {
     if (!RM && gsap) gsap.fromTo(pane, { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" });
     var h = $("h2", pane); if (h && s > 1) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
   }
-  next.addEventListener("click", function () { if (validate(step)) goStep(step + 1); });
-  back.addEventListener("click", function () { goStep(step - 1); });
+  next.addEventListener("click", function () { if (validate(step)) goStep(step + 1); }, on);
+  back.addEventListener("click", function () { goStep(step - 1); }, on);
   var doneH = $("#rfq-done h2", form), doneP = $("#rfq-done p", form);
   var MSG = {
     preview: ["Your request sheet is ready.", "This form is not connected to an inbox yet, so nothing has been sent. Once the RFQ endpoint is set in src/config.js, requests go straight to the SYNERGRID engineering team by email and into their enquiry sheet. For now, copy the summary."],
     sent: ["Request received.", "Your request has gone to the SYNERGRID engineering team, who will reply to the email you gave. Keep a copy of the summary for your records."],
-    failed: ["We could not send your request.", "The connection dropped before it reached us. Check your internet connection and issue it again, or copy the summary and email it to us" + (SITE.email ? " at " + SITE.email : "") + "."]
+    failed: ["We could not send your request.", "It did not reach us this time. Please issue it again in a moment, or copy the summary and email it to us" + (SITE.email ? " at " + SITE.email : "") + "."]
   };
   function finish(state) {
     doneH.textContent = MSG[state][0]; doneP.textContent = MSG[state][1];
@@ -94,6 +100,7 @@ export function init(view, api = {}) {
   }
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (sending) return;   // already on its way: a double click or Enter must not send it twice
     if (step < 3) { if (validate(step)) goStep(step + 1); return; }
     if (!validate(3)) return;
     var f = file();
@@ -107,21 +114,22 @@ export function init(view, api = {}) {
     ].join("\n");
     $("#rfq-summary", form).textContent = summary;
     if (!SITE.rfqEndpoint) { finish("preview"); return; }
+    sending = true;
     send.disabled = true; send.firstChild.textContent = "Sending request ";
     // Goes to apps-script/Code.gs: emailed to the team and added to the Google Sheet as a new row (Status: New)
     sendEnquiry({
       ref: refNo, hp: ($("#rfq-website", form).value || ""),
       name: v("rfq-name"), company: v("rfq-company"), email: v("rfq-email"), phone: v("rfq-phone"),
       scope: scopes().join(", "), location: v("rfq-location"), timeline: v("rfq-timeline"), notes: v("rfq-notes"), summary: summary
-    }, f).then(function () { finish("sent"); }, function () { finish("failed"); });
-  });
+    }, f).then(function () { sending = false; finish("sent"); }, function (e) { sending = false; console.error("[RFQ] enquiry not delivered:", e); finish("failed"); });
+  }, on);
   $("#rfq-copy", form).addEventListener("click", function () {
     var b = this, t = $("#rfq-summary", form).textContent;
     var ok = function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy summary"; }, 1800); };
     var fb = function () { var r = document.createRange(); r.selectNodeContents($("#rfq-summary", form)); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected, press Ctrl+C"; };
     try { navigator.clipboard.writeText(t).then(ok, fb); } catch (x) { fb(); }
-  });
-  $("#rfq-edit", form).addEventListener("click", function () { done.hidden = true; sheet.classList.remove("is-issued"); if (waBtn) waBtn.parentNode.hidden = false; goStep(1); });
+  }, on);
+  $("#rfq-edit", form).addEventListener("click", function () { done.hidden = true; sheet.classList.remove("is-issued"); if (waBtn) waBtn.parentNode.hidden = false; goStep(1); }, on);
   if (api.scope) { var c = $("#" + api.scope, form); if (c) c.checked = true; }
   goStep(1); live(); refreshWa();
   return () => { const list = cleanups; cleanups = []; list.forEach((f) => { try { f(); } catch (e) {} }); };
