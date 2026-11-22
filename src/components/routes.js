@@ -10,4 +10,4 @@ export const PAGES = [
   { path: "/contact", name: "Request a proposal", menu: "Contact & RFQ", note: "Request a turnkey proposal" },
 ];
 
-export const pageName = (path) => (PAGES.find((p) => p.path === path) || { name: "SYNERGRID" }).name;
+export const pageName = (path) => (PAGES.find((p) => p.path === path) || { name: "Synergrid Infra LLP" }).name;

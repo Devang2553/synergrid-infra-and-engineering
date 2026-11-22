@@ -47,7 +47,7 @@ const env = (import.meta && import.meta.env) || {};
 const mobileDigits = toDigits(MOBILE_NUMBER || env.VITE_MOBILE_NUMBER);
 
 export const SITE = {
-  name: "SYNERGRID INFRA & ENGINEERING SERVICES",
+  name: "Synergrid Infra LLP",
   tagline: "Powering Trust, Engineering Excellence",
   city: "Vadodara, Gujarat, India",
 

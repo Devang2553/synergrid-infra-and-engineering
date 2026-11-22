@@ -1,6 +1,6 @@
 # SYNERGRID website · Assembly (concept two)
 
-Website for **SYNERGRID INFRA & ENGINEERING SERVICES**, Vadodara.
+Website for **Synergrid Infra LLP**, Vadodara.
 Turnkey EPC Solutions, Concept-to-Commissioning. *Powering Trust, Engineering Excellence.*
 
 Concept two is an exploded engineering model: a 3D plant builds itself as you

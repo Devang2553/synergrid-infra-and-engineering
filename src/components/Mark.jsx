@@ -1,19 +1,20 @@
-/* The SYNERGRID mark: gear in Logo Navy and amber with a lightning bolt. */
-export function MarkSvg() {
-  return (
-    <svg viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path d="M22.00 35.00L20.65 34.92L19.29 38.26L16.11 37.34L16.75 33.79L14.95 32.71L13.90 31.85L10.84 33.75L8.81 31.14L11.41 28.65L10.59 26.71L10.24 25.40L6.65 25.14L6.54 21.83L10.11 21.35L10.59 19.29L11.08 18.03L8.32 15.70L10.18 12.97L13.36 14.68L14.95 13.29L16.09 12.56L15.22 9.06L18.33 7.94L19.90 11.19L22.00 11.00" fill="none" stroke="#6F93D8" strokeWidth="2.4" strokeLinejoin="round" /><path d="M22.00 11.00L23.35 11.08L24.71 7.74L27.89 8.66L27.25 12.21L29.05 13.29L30.10 14.15L33.16 12.25L35.19 14.86L32.59 17.35L33.41 19.29L33.76 20.60L37.35 20.86L37.46 24.17L33.89 24.65L33.41 26.71L32.92 27.97L35.68 30.30L33.82 33.03L30.64 31.32L29.05 32.71L27.91 33.44L28.78 36.94L25.67 38.06L24.10 34.81L22.00 35.00" fill="none" stroke="#F2A51A" strokeWidth="2.4" strokeLinejoin="round" /><path d="M14 9V2M18 7V3.5M27 6V1" stroke="#6F93D8" strokeWidth="1.8" strokeLinecap="round" /><path d="M25.5 6 15 25h7l-3.5 14L30 19h-7.2z" fill="#F2A51A" /></svg>
-  );
-}
+/* The Synergrid Infra LLP logo (client artwork, public/logo-full*.webp).
+   tone="light" for pale backgrounds, "dark" for night backgrounds, and
+   "auto" renders both so CSS can swap them when the header inverts. */
+const W = 480, H = 174;
 
-/* Mark + SYNERGRID wordmark, GRID in amber. */
-export function Brand({ sub = true, subStyle }) {
-  return (
-    <>
-      <MarkSvg />
-      <span>
-        <b>SYNER<span>GRID</span></b>
-        {sub && <small style={subStyle}>Infra &amp; Engineering Services</small>}
-      </span>
-    </>
+export function Brand({ tone = "light" }) {
+  const img = (t) => (
+    <img
+      key={t}
+      className={tone === "auto" ? "mark__img mark__img--" + t : "mark__img"}
+      src={t === "dark" ? "/logo-full-dark.webp" : "/logo-full.webp"}
+      width={W}
+      height={H}
+      alt={t === "light" || tone !== "auto" ? "Synergrid Infra LLP" : ""}
+      aria-hidden={tone === "auto" && t === "dark" ? "true" : undefined}
+      decoding="async"
+    />
   );
+  return tone === "auto" ? <>{img("light")}{img("dark")}</> : img(tone);
 }

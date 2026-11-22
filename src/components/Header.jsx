@@ -48,7 +48,7 @@ export default function Header({ menuOpen, setMenuOpen }) {
       <a className="skip" href="#main">Skip to content</a>
       <header className="bar" id="bar" ref={barRef}>
         <div className="wrap bar__in">
-          <Link className="mark" to="/" aria-label="SYNERGRID home"><Brand /></Link>
+          <Link className="mark" to="/" aria-label="Synergrid Infra LLP home"><Brand tone="auto" /></Link>
           <nav className="nav" aria-label="Main">
             {PAGES.filter((p) => p.nav).map((p) => <NavLink key={p.path} to={p.path}>{p.nav}</NavLink>)}
           </nav>
@@ -59,7 +59,7 @@ export default function Header({ menuOpen, setMenuOpen }) {
 
       <div className="menu" id="menu" ref={menuRef} role="dialog" aria-modal="true" aria-label="Site index" aria-hidden={!menuOpen} onKeyDown={onKey}>
         <div className="wrap menu__top">
-          <Link className="mark" to="/" aria-label="SYNERGRID home"><Brand sub={false} /></Link>
+          <Link className="mark" to="/" aria-label="Synergrid Infra LLP home"><Brand tone="dark" /></Link>
           <button ref={closeRef} className="bar__menu" type="button" style={{ display: "inline-flex" }} onClick={() => { setMenuOpen(false); btnRef.current && btnRef.current.focus(); }}>Close</button>
         </div>
         <div className="wrap" style={{ flex: 1, display: "flex", minHeight: 0 }}>

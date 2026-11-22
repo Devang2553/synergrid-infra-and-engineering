@@ -2,7 +2,7 @@
   "name": "synergrid-assembly",
   "private": true,
   "version": "1.0.0",
-  "description": "SYNERGRID INFRA & ENGINEERING SERVICES website, concept two (Assembly). Turnkey EPC Solutions, Concept-to-Commissioning.",
+  "description": "Synergrid Infra LLP website, concept two (Assembly). Turnkey EPC Solutions, Concept-to-Commissioning.",
   "type": "module",
   "scripts": {
     "dev": "vite",
