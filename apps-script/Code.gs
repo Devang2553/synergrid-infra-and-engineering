@@ -86,7 +86,13 @@ function handleEnquiry_(d) {
 
   var sheet = getSheet_();
   var ref = /^SG-\d{6}-\d{4}$/.test(d.ref || "") ? d.ref : makeRef_();
-  if (findRow_(sheet, ref)) return { ok: true, duplicate: true, ref: ref };   // double click, already saved
+  // The same enquiry can reach this script twice (a retried request, a double
+  // click). Remember each reference for 6 hours and the sheet as a backstop,
+  // so it is only ever saved and emailed once.
+  var cache = CacheService.getScriptCache();
+  if (cache.get("ref:" + ref)) return { ok: true, duplicate: true, ref: ref };
+  if (findRow_(sheet, ref)) { cache.put("ref:" + ref, "1", 21600); return { ok: true, duplicate: true, ref: ref }; }
+  cache.put("ref:" + ref, "1", 21600);
 
   // attachment -> Drive
   var blob = null, fileUrl = "", fileName = "";
