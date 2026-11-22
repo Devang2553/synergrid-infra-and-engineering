@@ -24,7 +24,7 @@ const SERVICE_BY_PATH = {
 export function pageDraft(pathname) {
   const service = SERVICE_BY_PATH[pathname];
   return [
-    "Hello SYNERGRID team,",
+    "Hello Synergrid Infra LLP team,",
     "",
     service
       ? "I found you on your website and I am interested in your " + service + " services."
@@ -43,7 +43,7 @@ export function pageDraft(pathname) {
 export function formDraft(f) {
   const line = (label, v) => "• " + label + ": " + (v && String(v).trim() ? String(v).trim() : "");
   const out = [
-    "Hello SYNERGRID team,",
+    "Hello Synergrid Infra LLP team,",
     "",
     f.ref
       ? "I have just sent a request for proposal on your website (reference " + f.ref + ")."

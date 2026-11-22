@@ -31,7 +31,7 @@ var CONFIG = {
   TIMEZONE: "Asia/Kolkata",
   MAX_BYTES: 10 * 1024 * 1024,                // matches the 10 MB limit on the website
   SEND_CLIENT_ACK: false,                     // true: also email the client a short "we received it" note
-  COMPANY: "SYNERGRID INFRA & ENGINEERING SERVICES"
+  COMPANY: "Synergrid Infra LLP"
 };
 // ------------------------------------------------------------------------------
 
@@ -148,10 +148,10 @@ function sendTeamEmail_(d, ref, when, fileUrl, blob, sheet, r) {
   var firstName = String(d.name || "").split(" ")[0];
 
   var buttons = [
-    btn_("Reply by email", "mailto:" + encodeURIComponent(d.email || "") + "?subject=" + encodeURIComponent("Your enquiry " + ref + " · SYNERGRID"), "#0B1A33", "#ffffff")
+    btn_("Reply by email", "mailto:" + encodeURIComponent(d.email || "") + "?subject=" + encodeURIComponent("Your enquiry " + ref + " · Synergrid Infra LLP"), "#0B1A33", "#ffffff")
   ];
   if (phoneDigits) {
-    buttons.push(btn_("WhatsApp " + firstName, "https://wa.me/" + phoneDigits + "?text=" + encodeURIComponent("Hello " + firstName + ", this is SYNERGRID INFRA & ENGINEERING SERVICES regarding your enquiry " + ref + ". "), "#1F8A5B", "#ffffff"));
+    buttons.push(btn_("WhatsApp " + firstName, "https://wa.me/" + phoneDigits + "?text=" + encodeURIComponent("Hello " + firstName + ", this is Synergrid Infra LLP regarding your enquiry " + ref + ". "), "#1F8A5B", "#ffffff"));
     buttons.push(btn_("Call " + firstName, "tel:+" + phoneDigits, "#ffffff", "#0B1A33", true));
   }
   buttons.push(btn_("Open enquiry sheet", sheetUrl, "#F2A51A", "#0B1A33"));
@@ -200,7 +200,7 @@ function sendClientAck_(d, ref) {
     replyTo: CONFIG.NOTIFY_EMAIL,
     body: "Hello " + first + ",\n\nThank you for contacting " + CONFIG.COMPANY + ". We have received your request for proposal (reference " + ref + ").\n\n" +
       "• Scope: " + (d.scope || "") + "\n• Facility location: " + (d.location || "") + "\n• Expected timeline: " + (d.timeline || "") + "\n\n" +
-      "An engineer will review it and contact you to confirm the details.\n\nRegards,\nSYNERGRID INFRA & ENGINEERING SERVICES\nF-111, Ratnam Heights, Opp. Motibhai Park, Khodiyar Nagar, New Karelibaug, Vadodara, Gujarat 390022"
+      "An engineer will review it and contact you to confirm the details.\n\nRegards,\nSynergrid Infra LLP\nF-111, Ratnam Heights, Opp. Motibhai Park, Khodiyar Nagar, New Karelibaug, Vadodara, Gujarat 390022"
   });
 }
 

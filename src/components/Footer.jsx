@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot__grid">
           <div className="stack">
-            <Link className="mark" to="/" aria-label="SYNERGRID home"><Brand subStyle={{ color: "var(--night-soft)" }} /></Link>
+            <Link className="mark" to="/" aria-label="Synergrid Infra LLP home"><Brand tone="dark" /></Link>
             <p style={{ margin: 0, maxWidth: "40ch" }}>Powering Trust, Engineering Excellence. Turnkey EPC and concept-to-commissioning solutions for industrial plants across India.</p>
           </div>
           <div>
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot__base">
-          <span>&copy; {new Date().getFullYear()} SYNERGRID Infra &amp; Engineering Services</span>
+          <span>&copy; {new Date().getFullYear()} Synergrid Infra LLP</span>
           <span>CEA 2023 · NBC 2016 · IEEE · NFPA · IEC · IS</span>
         </div>
       </div>

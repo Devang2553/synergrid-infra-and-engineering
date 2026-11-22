@@ -176,8 +176,8 @@ export default function Home() {
         {/* 5. codes ribbon */}
         <section className="night ribbon" aria-labelledby="codes-h">
           <h2 className="sr" id="codes-h">Codes we work to</h2>
-          <div className="ribbon__row" data-dir="-1"><span>CEA 2023 <b>·</b> NBC 2016 <b>·</b> IEEE 1584 <b>·</b> IEEE 80 <b>·</b> IEEE 519 <b>·</b>&nbsp;</span><span aria-hidden="true">CEA 2023 <b>·</b> NBC 2016 <b>·</b> IEEE 1584 <b>·</b> IEEE 80 <b>·</b> IEEE 519 <b>·</b>&nbsp;</span></div>
-          <div className="ribbon__row" data-dir="1"><span>NFPA 70E <b>·</b> IEC 62305 <b>·</b> IS 3043 <b>·</b> IS 732 <b>·</b> ETAP 2024 <b>·</b>&nbsp;</span><span aria-hidden="true">NFPA 70E <b>·</b> IEC 62305 <b>·</b> IS 3043 <b>·</b> IS 732 <b>·</b> ETAP 2024 <b>·</b>&nbsp;</span></div>
+          <div className="ribbon__row" data-dir="-1"><span>CEA 2023 <b>·</b> NBC 2016 <b>·</b> IS 12360 <b>·</b> IEEE 1584 <b>·</b> IEEE 80 &amp; 81 <b>·</b> IEEE 519 <b>·</b> IEEE 1100 <b>·</b> IEC 61000-5-2 <b>·</b> IS 2026 / IEC 60076 <b>·</b>&nbsp;</span><span aria-hidden="true">CEA 2023 <b>·</b> NBC 2016 <b>·</b> IS 12360 <b>·</b> IEEE 1584 <b>·</b> IEEE 80 &amp; 81 <b>·</b> IEEE 519 <b>·</b> IEEE 1100 <b>·</b> IEC 61000-5-2 <b>·</b> IS 2026 / IEC 60076 <b>·</b>&nbsp;</span></div>
+          <div className="ribbon__row" data-dir="1"><span>NFPA 70E <b>·</b> IS 2309 / IEC 62305 <b>·</b> IS 3043 <b>·</b> IS 732 <b>·</b> IEC 60364-4-41 <b>·</b> IEC 60364-5-54 <b>·</b> IS 13947 / IEC 60947 <b>·</b> ETAP 2024 <b>·</b>&nbsp;</span><span aria-hidden="true">NFPA 70E <b>·</b> IS 2309 / IEC 62305 <b>·</b> IS 3043 <b>·</b> IS 732 <b>·</b> IEC 60364-4-41 <b>·</b> IEC 60364-5-54 <b>·</b> IS 13947 / IEC 60947 <b>·</b> ETAP 2024 <b>·</b>&nbsp;</span></div>
           <div className="wrap" style={{ "marginTop": "clamp(36px,5vw,64px)" }}>
             <div className="cta">
               <p className="lede">Every design, audit and test report we sign is referenced to a published Indian or international code, so it holds up in front of the Electrical Inspector, your insurer and your board.</p>

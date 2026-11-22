@@ -18,15 +18,15 @@
    image are built from it. No trailing slash. */
 export const SITE_URL = "https://www.synergridinfra.com";
 
-export const BRAND = "SYNERGRID Infra & Engineering";
-export const LEGAL_NAME = "SYNERGRID INFRA & ENGINEERING SERVICES";
+export const BRAND = "Synergrid Infra LLP";
+export const LEGAL_NAME = "Synergrid Infra LLP";
 
 /* Share image shown in link previews: 1200 x 630, in public/. */
 export const OG_IMAGE = {
   path: "/og-image.jpg",
   width: 1200,
   height: 630,
-  alt: "SYNERGRID Infra & Engineering Services: turnkey industrial EPC, concept to commissioning. Vadodara, Gujarat.",
+  alt: "Synergrid Infra LLP: turnkey industrial EPC, concept to commissioning. Vadodara, Gujarat.",
 };
 
 /* Every indexable page. `crumb` is the name shown in Google's breadcrumb
@@ -37,21 +37,21 @@ export const ROUTES = [
   {
     path: "/",
     crumb: "Home",
-    title: "Turnkey Industrial EPC Contractor in Gujarat | SYNERGRID",
-    description: "SYNERGRID Infra & Engineering, Vadodara: turnkey industrial EPC from concept to commissioning. Civil & PEB, MEP, power system design, safety audits and testing.",
+    title: "Turnkey Industrial EPC Contractor in Gujarat | Synergrid Infra LLP",
+    description: "Synergrid Infra LLP, Vadodara: turnkey industrial EPC from concept to commissioning. Civil & PEB, MEP, power system design, safety audits and testing.",
     priority: "1.0",
   },
   {
     path: "/about",
     crumb: "About us",
-    title: "About SYNERGRID | Single-Point Industrial EPC Partner, Vadodara",
-    description: "One accountable EPC partner from bare land to a running plant. Meet the civil, MEP and electrical safety engineers behind SYNERGRID in Vadodara, Gujarat.",
+    title: "About Synergrid Infra LLP | Industrial EPC Partner, Vadodara",
+    description: "One accountable EPC partner from bare land to a running plant. Meet the civil, MEP and electrical safety engineers behind Synergrid Infra LLP in Vadodara, Gujarat.",
     priority: "0.7",
   },
   {
     path: "/civil-peb",
     crumb: "Civil & PEB",
-    title: "Industrial Civil & PEB Structure Construction | SYNERGRID",
+    title: "Industrial Civil & PEB Construction | Synergrid Infra LLP",
     description: "Greenfield civil works, RCC foundations, pre-engineered steel buildings (PEB), epoxy and ESD flooring, and STAAD.Pro structural design for industrial plants.",
     priority: "0.9",
     service: "Industrial civil construction and PEB steel structures",
@@ -59,7 +59,7 @@ export const ROUTES = [
   {
     path: "/mep",
     crumb: "MEP",
-    title: "Industrial MEP Contractor: HVAC, Electrical, Fire | SYNERGRID",
+    title: "Industrial MEP: HVAC, Electrical & Fire | Synergrid Infra LLP",
     description: "Integrated industrial MEP contracting in Gujarat: chilled water HVAC, HT/LT electrical, plumbing and effluent drainage, fire suppression and ELV automation.",
     priority: "0.9",
     service: "Industrial MEP contracting (HVAC, electrical, plumbing, fire, ELV)",
@@ -67,7 +67,7 @@ export const ROUTES = [
   {
     path: "/power-system-design",
     crumb: "Power system design",
-    title: "Power System Analysis in ETAP & SKM | SYNERGRID",
+    title: "Power System Analysis in ETAP & SKM | Synergrid Infra LLP",
     description: "Power system studies in ETAP and SKM: load flow, short circuit, relay coordination, arc flash, harmonics, substation design up to 400 kV and solar PV design.",
     priority: "0.9",
     service: "Electrical power system design and ETAP studies",
@@ -75,7 +75,7 @@ export const ROUTES = [
   {
     path: "/audits-testing",
     crumb: "Audits & testing",
-    title: "Electrical Safety Audit & Testing in Vadodara | SYNERGRID",
+    title: "Electrical Safety Audit & Testing in Vadodara | Synergrid Infra LLP",
     description: "CEA 2023 electrical safety audits, earthing and lightning risk assessment, relay and breaker testing, cable testing and transformer oil filtration in Gujarat.",
     priority: "0.9",
     service: "Electrical safety audits, testing and commissioning",
@@ -83,22 +83,22 @@ export const ROUTES = [
   {
     path: "/compliance",
     crumb: "Compliance",
-    title: "Quality Compliance Standards & Industrial Sectors | SYNERGRID",
-    description: "The IS, IEC, CEA and NBC codes behind every SYNERGRID design and test report, the industrial sectors we serve and the diagnostic equipment we measure with.",
+    title: "Compliance Standards & Industrial Sectors | Synergrid Infra LLP",
+    description: "The IS, IEC, CEA and NBC codes behind every Synergrid design and test report, the industrial sectors we serve and the diagnostic equipment we measure with.",
     priority: "0.6",
   },
   {
     path: "/contact",
     crumb: "Request a proposal",
-    title: "Request a Turnkey EPC Proposal | SYNERGRID, Vadodara",
-    description: "Send SYNERGRID your scope, facility location, timeline and BOQ to request a turnkey EPC proposal. Corporate office in New Karelibaug, Vadodara, Gujarat.",
+    title: "Request a Turnkey EPC Proposal | Synergrid Infra LLP",
+    description: "Send Synergrid Infra LLP your scope, facility location, timeline and BOQ to request a turnkey EPC proposal. Corporate office in New Karelibaug, Vadodara, Gujarat.",
     priority: "0.8",
   },
 ];
 
 export const NOT_FOUND = {
-  title: "Page Not Found | SYNERGRID",
-  description: "This page is not part of the SYNERGRID site.",
+  title: "Page Not Found | Synergrid Infra LLP",
+  description: "This page is not part of the Synergrid Infra LLP site.",
 };
 
 export const routeMeta = (path) => ROUTES.find((r) => r.path === path);
@@ -124,11 +124,11 @@ export function organizationLd(site) {
     "@type": ["ProfessionalService", "GeneralContractor"],
     "@id": ORG_ID,
     name: LEGAL_NAME,
-    alternateName: ["SYNERGRID", "Synergrid Infra", "SYNERGRID Infra & Engineering"],
+    alternateName: ["Synergrid", "Synergrid Infra", "SYNERGRID INFRA & ENGINEERING SERVICES"],
     slogan: site.tagline,
     description: "Turnkey industrial EPC contractor in Vadodara, Gujarat: civil and PEB structures, MEP, power system design, electrical safety audits, testing and commissioning, from concept to commissioning.",
     url: SITE_URL + "/",
-    logo: { "@type": "ImageObject", url: SITE_URL + "/logo.png", width: 512, height: 512 },
+    logo: { "@type": "ImageObject", url: SITE_URL + "/logo.png", width: 1200, height: 512 },
     image: SITE_URL + OG_IMAGE.path,
     email: site.email,
     address: ADDRESS,
@@ -161,7 +161,7 @@ export function websiteLd() {
     "@id": SITE_URL + "/#website",
     url: SITE_URL + "/",
     name: BRAND,
-    alternateName: "SYNERGRID",
+    alternateName: "Synergrid",
     inLanguage: "en-IN",
     publisher: { "@id": ORG_ID },
   };

@@ -1,4 +1,4 @@
-# SYNERGRID Infra & Engineering Services
+# Synergrid Infra LLP
 User-agent: *
 Allow: /
 

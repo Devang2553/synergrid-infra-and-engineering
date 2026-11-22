@@ -14,7 +14,7 @@ export default function About() {
             <div className="stack">
               <nav className="crumbs" aria-label="Breadcrumb"><Link to="/">SYNERGRID</Link><span>/</span><span>About us</span></nav>
               <h1 className="disp disp--3" data-split="">Single-Point Accountable Industrial <em>EPC Partner</em></h1>
-              <p className="lede">SYNERGRID INFRA &amp; ENGINEERING SERVICES was set up to end project fragmentation. We take industrial projects from bare land to a fully operational plant under one concept-to-commissioning EPC contract.</p>
+              <p className="lede">Synergrid Infra LLP was set up to end project fragmentation. We take industrial projects from bare land to a fully operational plant under one concept-to-commissioning EPC contract.</p>
               <div className="glance"><div><b>One contract</b><span>Design to handover</span></div><div><b>Three disciplines</b><span>Civil, MEP, electrical</span></div><div><b>Pan-India</b><span>Head office Vadodara</span></div></div>
               <div className="row"><Link className="btn btn--amber" to="/contact" data-magnet="">Request a proposal</Link></div>
             </div>
