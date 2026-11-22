@@ -76,7 +76,7 @@ export function init(view, api = {}) {
   var MSG = {
     preview: ["Your request sheet is ready.", "This form is not connected to an inbox yet, so nothing has been sent. Once the RFQ endpoint is set in src/config.js, requests go straight to the SYNERGRID engineering team by email and into their enquiry sheet. For now, copy the summary."],
     sent: ["Request received.", "Your request has gone to the SYNERGRID engineering team, who will reply to the email you gave. Keep a copy of the summary for your records."],
-    failed: ["We could not send your request.", "The connection dropped before it reached us. Check your internet connection and issue it again, or copy the summary and email it to us" + (SITE.email ? " at " + SITE.email : "") + "."]
+    failed: ["We could not send your request.", "It did not reach us this time. Please issue it again in a moment, or copy the summary and email it to us" + (SITE.email ? " at " + SITE.email : "") + "."]
   };
   function finish(state) {
     doneH.textContent = MSG[state][0]; doneP.textContent = MSG[state][1];
@@ -113,7 +113,7 @@ export function init(view, api = {}) {
       ref: refNo, hp: ($("#rfq-website", form).value || ""),
       name: v("rfq-name"), company: v("rfq-company"), email: v("rfq-email"), phone: v("rfq-phone"),
       scope: scopes().join(", "), location: v("rfq-location"), timeline: v("rfq-timeline"), notes: v("rfq-notes"), summary: summary
-    }, f).then(function () { finish("sent"); }, function () { finish("failed"); });
+    }, f).then(function () { finish("sent"); }, function (e) { console.error("[RFQ] enquiry not delivered:", e); finish("failed"); });
   });
   $("#rfq-copy", form).addEventListener("click", function () {
     var b = this, t = $("#rfq-summary", form).textContent;
