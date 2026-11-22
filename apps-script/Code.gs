@@ -93,6 +93,14 @@ function handleEnquiry_(d) {
   if (cache.get("ref:" + ref)) return { ok: true, duplicate: true, ref: ref };
   if (findRow_(sheet, ref)) { cache.put("ref:" + ref, "1", 21600); return { ok: true, duplicate: true, ref: ref }; }
   cache.put("ref:" + ref, "1", 21600);
+  // Older copies of the website could send one click as two requests with two
+  // different references. The same person sending the same request again within
+  // 2 minutes is treated as that repeat.
+  var sameKey = "same:" + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5,
+    [d.name, d.email, d.phone, d.company, d.scope, d.location, d.timeline, d.notes].map(function (x) { return String(x || "").trim().toLowerCase(); }).join("|"), Utilities.Charset.UTF_8));
+  var firstRef = cache.get(sameKey);
+  if (firstRef) return { ok: true, duplicate: true, ref: firstRef };
+  cache.put(sameKey, ref, 120);
 
   // attachment -> Drive
   var blob = null, fileUrl = "", fileName = "";
