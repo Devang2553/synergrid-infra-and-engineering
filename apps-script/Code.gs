@@ -66,6 +66,9 @@ function doPost(e) {
     console.error(err);
     return json_({ ok: false, error: String(err) });
   } finally {
+    // Write the new row before letting the next request in, so a repeat of the
+    // same enquiry (same reference) finds it and is not saved or emailed twice.
+    try { SpreadsheetApp.flush(); } catch (x) {}
     try { lock.releaseLock(); } catch (x) {}
   }
 }
