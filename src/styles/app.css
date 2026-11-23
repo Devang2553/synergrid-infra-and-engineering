@@ -348,7 +348,7 @@ button { font: inherit; color: inherit; }
 .panel .tbc, .page .tbc { color: var(--soft); }
 
 /* ---------- footer ---------- */
-.foot { background: var(--night); color: var(--night-soft); padding-block: 56px calc(28px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--night-rule); font-size: var(--t-sm); }
+.foot { background: var(--night); color: var(--night-soft); padding-block: 56px calc(84px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--night-rule); font-size: var(--t-sm); } /* bottom room so the floating WhatsApp button never covers the footer links */
 .foot__grid { display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)); gap: 36px; }
 .foot h3 { margin: 0 0 14px; font: 600 .7rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--night-ink); }
 .foot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }

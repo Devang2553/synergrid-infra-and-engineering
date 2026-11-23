@@ -34,7 +34,11 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot__base">
-          <span>&copy; {new Date().getFullYear()} Synergrid Infra LLP</span>
+          <span>
+            &copy; {new Date().getFullYear()} Synergrid Infra LLP
+            {/* plain <a>, not <Link>: sitemap.xml is a file written at build time, not an app page */}
+            {" · "}<a href="/sitemap.xml">Sitemap</a>
+          </span>
           <span>CEA 2023 · NBC 2016 · IEEE · NFPA · IEC · IS</span>
         </div>
       </div>
