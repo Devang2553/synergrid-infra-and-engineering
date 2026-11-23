@@ -49,9 +49,9 @@ export function init(view, api = {}) {
   var paths = {
     grid: [[360, 30], [360, 30]], hv: [[360, 30], [360, 103]], tx: [[360, 30], [360, 190]], bus: [[360, 30], [360, 280], [130, 280]],
     mcc: [[360, 30], [360, 280], [160, 280], [160, 404]], apfc: [[360, 30], [360, 280], [300, 280], [300, 386]],
-    // generation feeds the plant: out of the source, round the bottom, into the PCC bus and on to the loads
-    pv: [[440, 424], [440, 478], [52, 478], [52, 280], [160, 280], [160, 380]],
-    dg: [[580, 428], [580, 498], [34, 498], [34, 280], [160, 280], [160, 380]]
+    // generation feeds the plant: out of the source, round the bottom, and into the LT main panel (PCC) bus
+    pv: [[440, 424], [440, 478], [52, 478], [52, 280], [120, 280]],
+    dg: [[580, 428], [580, 498], [34, 498], [34, 280], [120, 280]]
   };
   var pos = { grid: [360, 30], hv: [360, 103], tx: [360, 189], bus: [130, 280], mcc: [160, 404], apfc: [300, 384], pv: [440, 404], dg: [580, 404] };
   var hots = {};
