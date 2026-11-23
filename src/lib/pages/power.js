@@ -24,7 +24,7 @@ export function init(view, api = {}) {
   svg.innerHTML = "";
   var ink = "#0B1A33", soft = "#556274";
   function p(d, w, c) { return svgEl("path", { d: d, fill: "none", stroke: c || ink, "stroke-width": w || 2.5, "stroke-linecap": "round" }, svg); }
-  function label(x, y, t, anchor) { var e = svgEl("text", { x: x, y: y, "text-anchor": anchor || "start", "font-family": "IBM Plex Mono, monospace", "font-size": 12, fill: ink, "letter-spacing": ".6" }, svg); e.textContent = t; return e; }
+  function label(x, y, t, anchor) { var e = svgEl("text", { x: x, y: y, "text-anchor": anchor || "start", "font-family": "IBM Plex Mono, monospace", "font-size": 12, fill: ink, "letter-spacing": ".6", stroke: "#fff", "stroke-width": 4, "stroke-linejoin": "round", "paint-order": "stroke" }, svg); e.textContent = t; return e; }
   // trunk
   p("M360 30V86"); p("M360 120V150"); p("M360 230V280");
   svgEl("rect", { x: 344, y: 86, width: 32, height: 34, fill: "#fff", stroke: ink, "stroke-width": 2.5 }, svg); p("M344 86L376 120M376 86L344 120", 1.5);
@@ -39,6 +39,9 @@ export function init(view, api = {}) {
   p("M282 380h36M286 392h28", 3);
   svgEl("rect", { x: 412, y: 384, width: 56, height: 40, fill: "none", stroke: ink, "stroke-width": 2.5 }, svg); p("M412 424L440 384L468 424", 1.5);
   svgEl("circle", { cx: 580, cy: 404, r: 24, fill: "none", stroke: ink, "stroke-width": 2.5 }, svg); label(580, 409, "G", "middle");
+  // current overlay sits under the labels so they stay readable
+  var hot = svgEl("path", { d: "", fill: "none", stroke: "#F2A51A", "stroke-width": 6, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: .9 }, svg);
+  var dots = []; for (var i = 0; i < 6; i++) dots.push(svgEl("circle", { r: 4.5, fill: "#FFC24D" }, svg));
   // labels
   label(384, 44, "GRID INCOMER"); label(388, 108, "HV BREAKER"); label(396, 194, "TRANSFORMER"); label(104, 270, "LT MAIN PANEL (PCC)");
   label(160, 452, "MCC & DRIVES", "middle"); label(300, 452, "APFC", "middle"); label(440, 452, "SOLAR PV", "middle"); label(580, 452, "DG SET", "middle");
@@ -46,10 +49,10 @@ export function init(view, api = {}) {
   var paths = {
     grid: [[360, 30], [360, 30]], hv: [[360, 30], [360, 103]], tx: [[360, 30], [360, 190]], bus: [[360, 30], [360, 280], [130, 280]],
     mcc: [[360, 30], [360, 280], [160, 280], [160, 404]], apfc: [[360, 30], [360, 280], [300, 280], [300, 386]],
-    pv: [[440, 404], [440, 280], [360, 280]], dg: [[580, 404], [580, 280], [360, 280]]
+    // generation feeds the plant: out of the source, round the bottom, into the PCC bus and on to the loads
+    pv: [[440, 424], [440, 478], [52, 478], [52, 280], [160, 280], [160, 380]],
+    dg: [[580, 428], [580, 498], [34, 498], [34, 280], [160, 280], [160, 380]]
   };
-  var hot = svgEl("path", { d: "", fill: "none", stroke: "#F2A51A", "stroke-width": 6, "stroke-linecap": "round", opacity: .9 }, svg);
-  var dots = []; for (var i = 0; i < 6; i++) dots.push(svgEl("circle", { r: 4.5, fill: "#FFC24D" }, svg));
   var pos = { grid: [360, 30], hv: [360, 103], tx: [360, 189], bus: [130, 280], mcc: [160, 404], apfc: [300, 384], pv: [440, 404], dg: [580, 404] };
   var hots = {};
   Object.keys(pos).forEach(function (k) {
