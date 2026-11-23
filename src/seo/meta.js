@@ -152,6 +152,11 @@ export function organizationLd(site) {
     },
   };
   if (site.phone) org.telephone = site.phone;
+  if (site.phones && site.phones.length > 1) {
+    org.contactPoint = site.phones.map((p) => ({
+      "@type": "ContactPoint", telephone: p.label, contactType: "sales", areaServed: "IN",
+    }));
+  }
   return org;
 }
 

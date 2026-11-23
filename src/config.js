@@ -9,7 +9,11 @@
       "98765 43210", "+91 98765 43210", "919876543210".
       While it is empty the WhatsApp button stays hidden and the contact
       page shows "To be added before launch". */
-export const MOBILE_NUMBER = "9725009345";   // TEMPORARY: Devang's number for testing. Replace with the company number when it arrives.
+export const MOBILE_NUMBER = "9725009355";
+
+/* 1b. Second phone number, shown after the main one (call link only).
+       Leave it empty to show just the main number. */
+export const SECOND_NUMBER = "70482 82112";
 
 /* 2. Google Apps Script web app URL that receives enquiries (ends in /exec).
       See README, "Connect enquiries". Until it is set, the form still works
@@ -45,6 +49,7 @@ function toPretty(d) {
 
 const env = (import.meta && import.meta.env) || {};
 const mobileDigits = toDigits(MOBILE_NUMBER || env.VITE_MOBILE_NUMBER);
+const secondDigits = toDigits(SECOND_NUMBER);
 
 export const SITE = {
   name: "Synergrid Infra LLP",
@@ -59,6 +64,8 @@ export const SITE = {
   phone: toPretty(mobileDigits),          // shown on the site, "" until set
   phoneHref: mobileDigits ? "tel:+" + mobileDigits : "",
   whatsapp: mobileDigits,                 // wa.me digits, "" until set
+  /* every number to show, main first: [{ label: "+91 ...", href: "tel:+91..." }] */
+  phones: [mobileDigits, secondDigits].filter(Boolean).map((d) => ({ label: toPretty(d), href: "tel:+" + d })),
 
   domain: "www.synergridinfra.com",       // live address; SEO URLs are set in src/seo/meta.js
   rfqEndpoint: RFQ_ENDPOINT || env.VITE_RFQ_ENDPOINT || "",

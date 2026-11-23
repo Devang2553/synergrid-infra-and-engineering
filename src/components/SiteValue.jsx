@@ -13,8 +13,8 @@ export default function SiteValue({ k, fallback = "To be added before launch", s
     );
   }
   if (k === "phone") {
-    return SITE.phone
-      ? <dd style={style}><a href={SITE.phoneHref}>{SITE.phone}</a></dd>
+    return SITE.phones.length
+      ? <dd style={style}>{SITE.phones.map((p, i) => <span key={p.href}>{i > 0 && <br />}<a href={p.href}>{p.label}</a></span>)}</dd>
       : <dd className="tbc" style={style}>{fallback}</dd>;
   }
   if (k === "email") return <dd style={style}><a href={"mailto:" + SITE.email}>{SITE.email}</a></dd>;
