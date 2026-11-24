@@ -27,7 +27,7 @@ export default function Footer() {
             <ul>
               <li><address className="addr">{SITE.addressLines.map((l) => <span key={l}>{l}</span>)}</address></li>
               <li><a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer">Get directions</a></li>
-              {SITE.phone && <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>}
+              {SITE.phones.map((p) => <li key={p.href}><a href={p.href}>{p.label}</a></li>)}
               <li><a href={"mailto:" + SITE.email}>{SITE.email}</a></li>
               <li><Link to="/contact">Request a proposal</Link></li>
             </ul>
